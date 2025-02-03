@@ -3,6 +3,22 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+function PokemonCard() {
+    return (
+        <div>
+            <h2>Pikachu</h2>
+            <p>Type: Électrique</p>
+            <h3>Attaques :</h3>
+            <ul>
+                <li>Éclair</li>
+                <li>Fatal-Foudre</li>
+                <li>Vive-Attaque</li>
+                <li>Queue de Fer</li>
+            </ul>
+        </div>
+    );
+}
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -22,6 +38,7 @@ function App() {
           count is {count}
         </button>
         <p>
+            <PokemonCard />
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
