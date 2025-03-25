@@ -1,52 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { useState, useEffect } from "react";
+import { getPokemons } from "./services/api.js";
+import PokemonList from "./components/PokemonList/PokemonList";
+import AddPokemonForm from "./components/AddPokemonForm/AddPokemonForm";
 
-function PokemonCard() {
+function App() {
+    const [pokemons, setPokemons] = useState([]);
+    const [currentView, setCurrentView] = useState('list'); // 'list' ou 'add'
+    
+    useEffect(() => {
+        getPokemons().then(data => setPokemons(data.pokemons));
+    }, []);
+
+    // Fonction pour supprimer un pokémon du state
+    const handleDeletePokemon = (id) => {
+        setPokemons(prevPokemons => prevPokemons.filter(pokemon => pokemon.id !== id));
+    };
+
+    // Fonction pour ajouter un pokémon au state
+    const handleAddPokemon = (newPokemon) => {
+        setPokemons(prevPokemons => [...prevPokemons, newPokemon]);
+        setCurrentView('list'); // Retourne à la liste après l'ajout
+    };
+
+    // Fonction pour naviguer entre les vues
+    const navigateTo = (view) => {
+        setCurrentView(view);
+    };
+
     return (
-        <div>
-            <h2>Pikachu</h2>
-            <p>Type: Électrique</p>
-            <h3>Attaques :</h3>
-            <ul>
-                <li>Éclair</li>
-                <li>Fatal-Foudre</li>
-                <li>Vive-Attaque</li>
-                <li>Queue de Fer</li>
-            </ul>
+        <div className="app-container">
+            <nav className="navbar">
+                <h1>Pokédex</h1>
+                <div className="nav-links">
+                    <button 
+                        onClick={() => navigateTo('list')} 
+                        className={`nav-link ${currentView === 'list' ? 'active' : ''}`}
+                    >
+                        Liste des Pokémons
+                    </button>
+                    <button 
+                        onClick={() => navigateTo('add')} 
+                        className={`nav-link ${currentView === 'add' ? 'active' : ''}`}
+                    >
+                        Ajouter un Pokémon
+                    </button>
+                </div>
+            </nav>
+
+            {currentView === 'list' ? (
+                <PokemonList 
+                    pokemons={pokemons} 
+                    deletePokemon={handleDeletePokemon} 
+                />
+            ) : (
+                <AddPokemonForm 
+                    addPokemon={handleAddPokemon}
+                    navigateToList={() => navigateTo('list')}
+                />
+            )}
         </div>
     );
 }
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-            <PokemonCard />
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default App;
