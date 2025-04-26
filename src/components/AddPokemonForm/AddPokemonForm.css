@@ -1,0 +1,230 @@
+.add-pokemon-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  top: 2rem;
+}
+
+.add-pokemon-container h2 {
+  text-align: center;
+  color: #ff5555;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.add-pokemon-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #ffcb05;
+  border-radius: 2px;
+}
+
+.add-pokemon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-section {
+  background: #f8f9fa;
+  padding: 1.8rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.form-section:hover {
+  transform: translateY(-5px);
+}
+
+.form-section h3 {
+  color: #3b4cca;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.8rem;
+  font-size: 1.4rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  color: #444;
+  font-size: 1.05rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ff5555;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 85, 85, 0.2);
+}
+
+/* Style amélioré pour le sélecteur de type */
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-group select::-ms-expand {
+  display: none;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.submit-button {
+  background-color: #ff5555;
+  color: white;
+  box-shadow: 0 4px 6px rgba(255, 85, 85, 0.2);
+}
+
+.submit-button:hover {
+  background-color: #ff3333;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(255, 85, 85, 0.3);
+}
+
+.cancel-button {
+  background-color: #f0f0f0;
+  color: #555;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+  color: #f44336;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem;
+  background-color: #ffebee;
+  border-radius: 8px;
+  border-left: 4px solid #f44336;
+  font-weight: 500;
+}
+
+/* Style pour les champs requis */
+.form-group label.required::after {
+  content: ' *';
+  color: #f44336;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .add-pokemon-container {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .form-row,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .submit-button,
+  .cancel-button {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+.type-select {
+  padding-left: 10px;
+}
+
+.type-select-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.type-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Stylisation du sélecteur de type personnalisé */
+select.type-select option {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* Version safari/webkit */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select.type-select {
+    padding-left: 30px;
+    background-position: left 10px center;
+  }
+} 
